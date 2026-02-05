@@ -27,21 +27,33 @@ public class ProductManager implements ProductService{
                 product.getDescription(),
                 product.getPrice()
         );
+
     }
 
     @Override
     public ProductResponseDTO createProduct(ProductRequestDTO dto) {
-        Product product = mapToEntity(dto);
-        Product saveProduct = productRepository.save(product);
+
+        Product newProduct = new Product();
+        newProduct.setName(dto.getName());
+        newProduct.setDescription(dto.getDescription());
+        newProduct.setPrice(dto.getPrice());
+
+        Product saveProduct = productRepository.save(newProduct);
         return mapToResponseDTO(saveProduct);
+
+
+       /* Product product = mapToEntity(dto);
+          Product saveProduct = productRepository.save(product);
+          return mapToResponseDTO(saveProduct); */
     }
 
+    /*
     private Product mapToEntity(ProductRequestDTO dto){
         Product newProduct = new Product();
         newProduct.setName(dto.getName());
         newProduct.setDescription(dto.getDescription());
         newProduct.setPrice(dto.getPrice());
         return newProduct;
-    }
+    } */
 
 }
